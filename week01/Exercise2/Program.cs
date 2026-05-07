@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+using System.Text.Encodings.Web;
 
 class Program
 {
@@ -27,6 +28,9 @@ class Program
 
     static string LetterGrade(float grade)
     {
+        // These two lines could replace the next twenty.
+        // int tens = Convert.ToInt32(grade / 10);
+        // string letterGrade = "FFFFFFDCBAA".Substring(tens, 1);
         string letterGrade;
         if (grade >= 90)
         {
