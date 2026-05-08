@@ -7,7 +7,7 @@ class Program
         Random randomGenerator = new Random();
         do
         {
-            int magicNumber = randomGenerator.Next(1, 11);
+            int magicNumber = randomGenerator.Next(1, 101);
             int guesses = 0;
             
             while (true)
