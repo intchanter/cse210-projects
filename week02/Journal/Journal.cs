@@ -11,6 +11,7 @@ class Journal
         {
             foreach (Entry entry in _entries)
             {
+                entry.Display();
                 outFile.WriteLine(Entry.Format(entry));
             }
         }
@@ -29,13 +30,11 @@ class Journal
 
     public void AddEntry(Entry entry)
     {
-        Console.WriteLine("AddEntry()");
         _entries.Add(entry);
     }
 
     public void DisplayAll()
     {
-        Console.WriteLine("DisplayAll()");
         foreach (Entry entry in _entries)
         {
             entry.Display();

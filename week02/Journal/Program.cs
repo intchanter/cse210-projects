@@ -7,6 +7,7 @@ using System.Net;
  *   Cleaned up the abstraction from the suggested structure by having
  *      journal class handle its I/O and the Entry class handle the formatting
  *      and parsing of individual entries.
+ *   Updated the save and load functionality to use the JSONLines format
  */
 
 class Program

@@ -4,10 +4,9 @@ using System.Xml.Linq;
 
 class Entry
 {
-    private static string _delimiter = "\e";
-    public DateTime _date;
-    public string _prompt;
-    public string _response;
+    public DateTime _date { get; set; }
+    public string _prompt { get; set; }
+    public string _response { get; set; }
 
     public void Display()
     {
@@ -19,17 +18,11 @@ class Entry
 
     public static string Format(Entry e)
     {
-        return $"{e._date}\e{e._prompt}\e{e._response}";
+        return System.Text.Json.JsonSerializer.Serialize(e);
     }
 
     public static Entry Parse(string s)
     {
-        Entry entry = new();
-        Console.WriteLine(s);
-        string[] parts = s.Split(_delimiter);
-        entry._date = DateTime.Parse(parts[0]);
-        entry._prompt = parts[1];
-        entry._response = parts[2];
-        return entry;
+        return System.Text.Json.JsonSerializer.Deserialize<Entry>(s);
     }
 }
