@@ -5,8 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Reference reference = new Reference("Abraham", 3, 22, 23);
-        Scripture scripture = new Scripture(
+        Scripture scripture = new(
             new Reference("Abraham", 3, 22, 23),
             "Now the Lord had shown unto me, Abraham, the intelligences"
             + " that were organized before the world was; and among all"
