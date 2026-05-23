@@ -1,5 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
-
 class Word
 {
     private string _text;
@@ -11,7 +9,8 @@ class Word
         _isHidden = false;
     }
 
-    public void Hide() {
+    public void Hide()
+    {
         _isHidden = true;
     }
 
@@ -22,12 +21,16 @@ class Word
 
     public bool IsHidden()
     {
-        
+
         return _isHidden;
     }
 
     public string GetDisplayText()
     {
-        return _isHidden ? new string('_', _text.Count()) : _text;
+        return (
+            _isHidden
+            ? ColorText.Bold(ColorText.Black(new string('_', _text.Length)))
+            : ColorText.Bold(ColorText.Green(_text))
+        );
     }
 }

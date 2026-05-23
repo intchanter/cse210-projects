@@ -1,5 +1,3 @@
-using System.Data;
-
 class Reference
 {
     private string _book;
@@ -27,8 +25,8 @@ class Reference
 
     public string GetDisplayText()
     {
-        return (
-            _endVerse != -1
+        return ColorText.Bold(
+            _endVerse == -1
             ? $"{_book} {_chapter}:{_verse}"
             : $"{_book} {_chapter}:{_verse}-{_endVerse}"
         );

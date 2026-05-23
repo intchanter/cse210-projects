@@ -12,6 +12,7 @@ class Scripture
             _words.Add(new Word(part));
         }
     }
+
     public void HideRandomWords(int count)
     {
         // Naive approach, probably good enough for this program
@@ -30,7 +31,7 @@ class Scripture
             {
                 break;
             }
-            int toHide = randomGenerator.Next(0, shownWords.Count());
+            int toHide = randomGenerator.Next(0, shownWords.Count);
             shownWords[toHide].Hide();
             count--;
         }
@@ -43,8 +44,9 @@ class Scripture
         {
             words.Add(word.GetDisplayText());
         }
-        return $"{_reference.GetDisplayText()}: {String.Join(" ", words)}";
+        return $"{_reference.GetDisplayText()}\n{String.Join(" ", words)}";
     }
+
     public bool IsCompletelyHidden()
     {
         foreach (Word word in _words)
