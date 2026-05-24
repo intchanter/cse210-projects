@@ -1,6 +1,4 @@
-using System.Drawing;
-
-class Shape
+abstract class Shape
 {
     private string _color;
 
@@ -20,8 +18,5 @@ class Shape
     }
 
     // Should this be abstract?
-    public virtual double GetArea()
-    {
-        return -1;
-    }
+    public abstract double GetArea();
 }

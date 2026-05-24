@@ -1,6 +1,3 @@
-using System.Drawing;
-using System.Reflection.Metadata.Ecma335;
-
 class Circle : Shape
 {
     private double _radius;
