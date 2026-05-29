@@ -1,0 +1,49 @@
++----------------------+
+| Order                |
++----------------------+
+| _customer: Customer  |
+| _products: Product[] |
++----------------------+
+| AddProduct(): void   |
+| GetSubtotal(): float |
+| GetShipping(): float |
+| GetTotal(): float    |
++----------------------+
+
+
++--------------------------+
+| Customer                 |
++--------------------------+
+| _name: string            |
+| _address: Address        |
++--------------------------+
+| GetName(): string        |
+| GetAddressText(): string |
+| IsInUnitedStates(): bool |
++--------------------------+
+
+
++--------------------------+
+| Address                  |
++--------------------------+
+| _streetAddress: string   |
+| _city: string            |
+| _state: string           |
+| _country: string         |
++--------------------------+
+| GetCountry(): string     |
+| GetDisplayText(): string |
++--------------------------+
+
+
++--------------------------+
+| Product                  |
++--------------------------+
+| _name: string            |
+| _productId: string       |
+| _price: float            |
+| _quantity: int           |
++--------------------------+
+| GetCost(): float         |
+| GetDisplayText(): string |
++--------------------------+
