@@ -11,16 +11,8 @@ abstract class Activity
 
     public abstract float GetDistance();
     protected abstract string GetActivityType();
-
-    public float GetPace()
-    {
-        return _minutes / GetDistance();
-    }
-
-    public float GetSpeed()
-    {
-        return GetDistance() * 60 / _minutes;
-    }
+    public abstract float GetPace();
+    public abstract float GetSpeed();
 
     public string GetSummary()
     {

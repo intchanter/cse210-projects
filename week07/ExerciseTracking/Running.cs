@@ -16,4 +16,14 @@ class Running : Activity
     {
         return _distance;
     }
+
+    public override float GetPace()
+    {
+        return _minutes / GetDistance();
+    }
+
+    public override float GetSpeed()
+    {
+        return GetDistance() * 60 / _minutes;
+    }
 }

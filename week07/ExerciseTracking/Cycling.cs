@@ -16,4 +16,14 @@ class Cycling : Activity
     {
         return _kph * _minutes / 60.0f;
     }
+    
+    public override float GetPace()
+    {
+        return _minutes / GetDistance();
+    }
+
+    public override float GetSpeed()
+    {
+        return GetDistance() * 60 / _minutes;
+    }
 }
