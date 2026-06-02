@@ -1,14 +1,16 @@
-+----------------------+
-| Order                |
-+----------------------+
-| _customer: Customer  |
-| _products: Product[] |
-+----------------------+
-| AddProduct(): void   |
-| GetSubtotal(): float |
-| GetShipping(): float |
-| GetTotal(): float    |
-+----------------------+
++--------------------------------+
+| Order                          |
++--------------------------------+
+| _customer: Customer            |
+| _products: Product[]           |
++--------------------------------+
+| AddProduct(): void             |
+| GetSubtotal(): float           |
+| GetShipping(): float           |
+| GetTotal(): float              |
+| GetShippingLabelText(): string |
+| GetPackingLabelText(): string  |
++--------------------------------+
 
 
 +--------------------------+
@@ -33,6 +35,7 @@
 +--------------------------+
 | GetCountry(): string     |
 | GetDisplayText(): string |
+| IsInUnitedStates(): bool |
 +--------------------------+
 
 
