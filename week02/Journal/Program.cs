@@ -1,6 +1,3 @@
-using System;
-using System.Net;
-
 /*
  * Enhancement:
  *   Added the ability to select menu items with a letter

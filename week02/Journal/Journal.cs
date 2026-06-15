@@ -1,6 +1,3 @@
-using System.ComponentModel;
-using System.Xml.Linq;
-
 class Journal
 {
     private List<Entry> _entries = new();

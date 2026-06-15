@@ -1,7 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.Xml.Linq;
-
 class Entry
 {
     public DateTime _date { get; set; }
