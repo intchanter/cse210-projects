@@ -1,3 +1,5 @@
+using System.Diagnostics.Tracing;
+
 class GoalManager
 {
     private List<Goal> _goals = [];
@@ -48,8 +50,11 @@ class GoalManager
 
     void DisplayMenu()
     {
+        int level = Level(_score);
         Console.Write(
-            $"\nYou have {_score} points.\n\n"
+            $"\nYou have {_score} points, and are level {Level(_score)}.\n"
+            + $"You need {PointsToNextLevel(_score, level + 1)} more points"
+            + $" to reach level {level + 1}.\n\n"
             + "Please make your selection:\n\n"
             + "(C)reate a new goal\n"
             + "(D)isplay your goals\n"
@@ -117,19 +122,32 @@ class GoalManager
 
     public void RecordEvent()
     {
-        Console.Write("Which goal number did you do? ");
-        int selection = 0;
+        if (_goals.Count < 1)
+        {
+            Console.WriteLine("No goals for which to record an event.");
+            return;
+        }
+
+        int selection;
         while (true)
         {
+            Console.Write("Which goal number did you do? ");
             try
             {
                 selection = int.Parse(Console.ReadLine());
-                break;
             }
             catch (FormatException)
             {
                 Console.WriteLine("Error parsing selection.");
+                continue;
             }
+
+            if (selection < 1 || selection > _goals.Count)
+            {
+                Console.WriteLine("Goal selection out of range.");
+                continue;
+            }
+            break;
         }
         int points = _goals[selection - 1].RecordEvent();
         if (points > 0)
@@ -154,10 +172,21 @@ class GoalManager
 
     public void LoadGoals()
     {
+        StreamReader stream;
+
         Console.Write("What filename would you like to read from? ");
         string filename = Console.ReadLine();
 
-        using StreamReader stream = new(filename);
+        try
+        {
+            stream = new(filename);
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("No such file: {filename}");
+            return;
+        }
+
         string firstLine = stream.ReadLine();
         _score = System.Text.Json.JsonSerializer.Deserialize<int>(firstLine);
 
@@ -167,5 +196,18 @@ class GoalManager
             Goal goal = Goal.Parse(stream.ReadLine());
             _goals.Add(goal);
         }
+    }
+
+    public static int Level(int score)
+    {
+        // The level will be determined by the previous Triangle(N) multiple of 100
+        // https://math.stackexchange.com/questions/2319295/find-n-from-a-random-number-rounded-up-to-nearest-triangle-number
+        return (int) Math.Floor((Math.Sqrt(8.0f * (score / 100.0f) + 1) - 1) / 2);
+
+    }
+
+    public static int PointsToNextLevel(int score, int nextLevel)
+    {
+        return (int) Math.Floor(nextLevel * (nextLevel + 1) / 2.0f) * 100 - score;
     }
 }
