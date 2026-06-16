@@ -1,10 +1,13 @@
-using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 class ChecklistGoal : Goal
 {
-    int _amountCompleted;
-    int _target;
-    int _bonus;
+    [JsonInclude]
+    private int _amountCompleted;
+    [JsonInclude]
+    private readonly int _target;
+    [JsonInclude]
+    private readonly int _bonus;
 
     public ChecklistGoal() : base()
     {
@@ -41,6 +44,14 @@ class ChecklistGoal : Goal
         _bonus = bonus;
     }
 
+    [JsonConstructor]
+    public ChecklistGoal(string _shortName, string _description, int _points, int _amountCompleted, int _target, int _bonus) : base(_shortName, _description, _points)
+    {
+        this._amountCompleted = _amountCompleted;
+        this._target = _target;
+        this._bonus = _bonus;
+    }
+
     public override int RecordEvent()
     {
         if (IsComplete())
@@ -58,12 +69,9 @@ class ChecklistGoal : Goal
 
         return _points;
     }
+    
     public override bool IsComplete()
     {
         return _amountCompleted >= _target;
-    }
-    public override string GetStringRepresentation()
-    {
-        return "";
     }
 }

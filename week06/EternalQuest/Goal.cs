@@ -1,7 +1,17 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "GoalType")]
+[JsonDerivedType(typeof(SimpleGoal), "Simple")]
+[JsonDerivedType(typeof(EternalGoal), "Eternal")]
+[JsonDerivedType(typeof(ChecklistGoal), "Checklist")]
 abstract class Goal
 {
+    [JsonInclude]
     private string _shortName;
+    [JsonInclude]
     private string _description;
+    [JsonInclude]
     protected int _points;
 
     public Goal()
@@ -28,9 +38,16 @@ abstract class Goal
         _points = points;
     }
 
+    [JsonConstructor]
+    public Goal(string _shortName, string _description, int _points)
+    {
+        this._shortName = _shortName;
+        this._description = _description;
+        this._points = _points;
+    }
+
     public abstract int RecordEvent();
     public abstract bool IsComplete();
-    public abstract string GetStringRepresentation();
 
     public virtual string GetDetailsString()
     {
@@ -38,5 +55,15 @@ abstract class Goal
             $"[{(IsComplete() ? "X" : " ")}]"
             + $" {_shortName} ({_description})"
         );
+    }
+
+    public static string Format(Goal goal)
+    {
+        return System.Text.Json.JsonSerializer.Serialize(goal);
+    }
+
+    public static Goal Parse(string goal)
+    {
+        return System.Text.Json.JsonSerializer.Deserialize<Goal>(goal);
     }
 }

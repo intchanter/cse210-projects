@@ -1,6 +1,19 @@
-class SimpleGoal() : Goal
+using System.Text.Json.Serialization;
+
+class SimpleGoal : Goal
 {
+    [JsonInclude]
     private bool _isComplete = false;
+
+    public SimpleGoal() : base()
+    {
+    }
+
+    [JsonConstructor]
+    public SimpleGoal(string _shortName, string _description, int _points, bool _isComplete) : base(_shortName, _description, _points)
+    {
+        this._isComplete = _isComplete;
+    }
 
     public override int RecordEvent()
     {
@@ -16,10 +29,5 @@ class SimpleGoal() : Goal
     public override bool IsComplete()
     {
         return _isComplete;
-    }
-
-    public override string GetStringRepresentation()
-    {
-        return "TBI";
     }
 }

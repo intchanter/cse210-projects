@@ -29,11 +29,11 @@ class GoalManager
                     break;
 
                 case "s":
-                    Console.WriteLine("Save: To be implemented");
+                    SaveGoals();
                     break;
 
                 case "l":
-                    Console.WriteLine("Load: To be implemented");
+                    LoadGoals();
                     break;
 
                 case "q":
@@ -54,8 +54,8 @@ class GoalManager
             + "(C)reate a new goal\n"
             + "(D)isplay your goals\n"
             + "(R)ecord a completion\n"
-            + "Save your goals\n"
-            + "Load your goals\n"
+            + "(S)ave your goals\n"
+            + "(L)oad your goals\n"
             + "(Q)uit\n"
             + "> "
         );
@@ -141,11 +141,31 @@ class GoalManager
 
     public void SaveGoals()
     {
+        Console.Write("What filename would you like to write to? ");
+        string filename = Console.ReadLine();
 
+        using StreamWriter stream = new(filename);
+        stream.WriteLine(System.Text.Json.JsonSerializer.Serialize(_score));
+        foreach (Goal goal in _goals)
+        {
+            stream.WriteLine(Goal.Format(goal));
+        }
     }
 
     public void LoadGoals()
     {
+        Console.Write("What filename would you like to read from? ");
+        string filename = Console.ReadLine();
 
+        using StreamReader stream = new(filename);
+        string firstLine = stream.ReadLine();
+        _score = System.Text.Json.JsonSerializer.Deserialize<int>(firstLine);
+
+        _goals = [];
+        while (stream.Peek() >= 0)
+        {
+            Goal goal = Goal.Parse(stream.ReadLine());
+            _goals.Add(goal);
+        }
     }
 }
