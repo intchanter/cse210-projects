@@ -9,8 +9,10 @@ abstract class Goal
 {
     [JsonInclude]
     private string _shortName;
+    
     [JsonInclude]
     private string _description;
+        
     [JsonInclude]
     protected int _points;
 

@@ -4,8 +4,10 @@ class ChecklistGoal : Goal
 {
     [JsonInclude]
     private int _amountCompleted;
+    
     [JsonInclude]
     private readonly int _target;
+        
     [JsonInclude]
     private readonly int _bonus;
 
@@ -59,7 +61,7 @@ class ChecklistGoal : Goal
             Console.WriteLine("That goal is already completed.");
             return 0;
         }
-        
+
         _amountCompleted += 1;
         if (IsComplete())
         {
@@ -69,7 +71,12 @@ class ChecklistGoal : Goal
 
         return _points;
     }
-    
+
+    public override string GetDetailsString()
+    {
+        return $"{base.GetDetailsString()} {_amountCompleted}/{_target}"; 
+    }
+
     public override bool IsComplete()
     {
         return _amountCompleted >= _target;
