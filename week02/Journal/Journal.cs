@@ -17,7 +17,7 @@ class Journal
     public void LoadFromFile(string filename)
     {
         _entries = new();
-        string[] lines = System.IO.File.ReadAllLines(filename);
+        string[] lines = File.ReadAllLines(filename);
         foreach (string line in lines)
         {
             Entry entry = Entry.Parse(line);
